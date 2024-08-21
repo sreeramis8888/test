@@ -18,6 +18,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     fetchCategory();
     fetchData();
+
   }
 
   // This widget is the root of your application.
