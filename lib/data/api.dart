@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:test/screen/home.dart';
 
@@ -13,8 +14,8 @@ int coins = 5213;
 List homecardid = [];
 List homeimage = [];
 
-fetchTitle() async {
-  const String apiUrl = "https://loyalty-card.onrender.com/api/category";
+fetchCategory() async {
+  const String apiUrl = "https://loyalty-app-pnwx.onrender.com/api/category";
   const String bearerToken =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzBhNjlhNTg3ZWVjNDg3MWI3Mzk4NyIsImlhdCI6MTcxNDQ4MDI4NH0.9iVivjFzBB1CV_eGOD34apiS6zuLGHlVWaFjl50V5Nc";
   http.Response response = await http.get(
@@ -34,7 +35,7 @@ fetchTitle() async {
 }
 
 fetchData() async {
-  const String apiUrl = "https://loyalty-card.onrender.com/api/loyalitycard";
+  const String apiUrl = "https://loyalty-app-pnwx.onrender.com/api/coupon";
   const String bearerToken =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzBhNjlhNTg3ZWVjNDg3MWI3Mzk4NyIsImlhdCI6MTcxNDQ4MDI4NH0.9iVivjFzBB1CV_eGOD34apiS6zuLGHlVWaFjl50V5Nc";
   http.Response response = await http.get(
@@ -43,6 +44,7 @@ fetchData() async {
       'Authorization': 'Bearer $bearerToken',
     },
   );
+  log('Response status: ${response.statusCode}');
   if (response.statusCode == 200) {
     mapResponse = json.decode(response.body);
     data = mapResponse['result'];
@@ -66,7 +68,7 @@ fetchData() async {
 
 redeemCard(id) async {
   final String url =
-      'https://loyalty-card.onrender.com/api/redeemcard/otpCheck';
+      'https://loyalty-app-pnwx.onrender.com/api/redeemcard/otpCheck';
   const String bearerToken =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzBhNjlhNTg3ZWVjNDg3MWI3Mzk4NyIsImlhdCI6MTcxNDQ4MDI4NH0.9iVivjFzBB1CV_eGOD34apiS6zuLGHlVWaFjl50V5Nc";
   final Map<String, dynamic> payload = {
@@ -103,7 +105,7 @@ redeemCard(id) async {
 }
 
 fetchCardData(String id1) async {
-  String apiUrl = "https://loyalty-card.onrender.com/api/loyalitycard/$id1";
+  String apiUrl = "https://loyalty-app-pnwx.onrender.com/api/coupon/$id1";
   const String bearerToken =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzBhNjlhNTg3ZWVjNDg3MWI3Mzk4NyIsImlhdCI6MTcxNDQ4MDI4NH0.9iVivjFzBB1CV_eGOD34apiS6zuLGHlVWaFjl50V5Nc";
   http.Response response = await http.get(
@@ -112,6 +114,7 @@ fetchCardData(String id1) async {
       'Authorization': 'Bearer $bearerToken',
     },
   );
+  print('Response status: ${response.statusCode}');
   if (response.statusCode == 200) {
     Map<String, dynamic> mapResponse1 = json.decode(response.body);
     homeimage.add(mapResponse1['data']['image'].toString());
