@@ -1,10 +1,8 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pinput/pinput.dart';
 
-import 'api.dart';
+import '../data/api.dart';
 
 class CouponPage extends StatefulWidget {
   const CouponPage({super.key});
@@ -142,7 +140,7 @@ class InnerCard extends StatelessWidget {
   var image;
   var id;
   var brandlogo;
-  InnerCard({required this.image, required this.id,required this.brandlogo});
+  InnerCard({required this.image, required this.id, required this.brandlogo});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

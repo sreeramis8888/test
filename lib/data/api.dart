@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:test/home.dart';
+import 'package:test/screen/home.dart';
 
 late Map mapResponse;
 late List data;
@@ -15,7 +15,8 @@ List homeimage = [];
 
 fetchTitle() async {
   const String apiUrl = "https://loyalty-card.onrender.com/api/category";
-  const String bearerToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzBhNjlhNTg3ZWVjNDg3MWI3Mzk4NyIsImlhdCI6MTcxNDQ4MDI4NH0.9iVivjFzBB1CV_eGOD34apiS6zuLGHlVWaFjl50V5Nc";
+  const String bearerToken =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzBhNjlhNTg3ZWVjNDg3MWI3Mzk4NyIsImlhdCI6MTcxNDQ4MDI4NH0.9iVivjFzBB1CV_eGOD34apiS6zuLGHlVWaFjl50V5Nc";
   http.Response response = await http.get(
     Uri.parse(apiUrl),
     headers: {
@@ -34,7 +35,8 @@ fetchTitle() async {
 
 fetchData() async {
   const String apiUrl = "https://loyalty-card.onrender.com/api/loyalitycard";
-  const String bearerToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzBhNjlhNTg3ZWVjNDg3MWI3Mzk4NyIsImlhdCI6MTcxNDQ4MDI4NH0.9iVivjFzBB1CV_eGOD34apiS6zuLGHlVWaFjl50V5Nc";
+  const String bearerToken =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzBhNjlhNTg3ZWVjNDg3MWI3Mzk4NyIsImlhdCI6MTcxNDQ4MDI4NH0.9iVivjFzBB1CV_eGOD34apiS6zuLGHlVWaFjl50V5Nc";
   http.Response response = await http.get(
     Uri.parse(apiUrl),
     headers: {
@@ -55,7 +57,6 @@ fetchData() async {
         'brandlogo': item['brand_logo'].toString(),
         'image': item['image'].toString(),
         'id': item['_id'].toString(),
-        
       });
     }
   } else {
@@ -64,8 +65,10 @@ fetchData() async {
 }
 
 redeemCard(id) async {
-  final String url = 'https://loyalty-card.onrender.com/api/redeemcard/otpCheck';
-  const String bearerToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzBhNjlhNTg3ZWVjNDg3MWI3Mzk4NyIsImlhdCI6MTcxNDQ4MDI4NH0.9iVivjFzBB1CV_eGOD34apiS6zuLGHlVWaFjl50V5Nc";
+  final String url =
+      'https://loyalty-card.onrender.com/api/redeemcard/otpCheck';
+  const String bearerToken =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzBhNjlhNTg3ZWVjNDg3MWI3Mzk4NyIsImlhdCI6MTcxNDQ4MDI4NH0.9iVivjFzBB1CV_eGOD34apiS6zuLGHlVWaFjl50V5Nc";
   final Map<String, dynamic> payload = {
     "loyalityId": "$id",
     "otp": otp,
@@ -101,7 +104,8 @@ redeemCard(id) async {
 
 fetchCardData(String id1) async {
   String apiUrl = "https://loyalty-card.onrender.com/api/loyalitycard/$id1";
-  const String bearerToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzBhNjlhNTg3ZWVjNDg3MWI3Mzk4NyIsImlhdCI6MTcxNDQ4MDI4NH0.9iVivjFzBB1CV_eGOD34apiS6zuLGHlVWaFjl50V5Nc";
+  const String bearerToken =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzBhNjlhNTg3ZWVjNDg3MWI3Mzk4NyIsImlhdCI6MTcxNDQ4MDI4NH0.9iVivjFzBB1CV_eGOD34apiS6zuLGHlVWaFjl50V5Nc";
   http.Response response = await http.get(
     Uri.parse(apiUrl),
     headers: {

@@ -1,8 +1,6 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:test/api.dart';
-import 'package:test/coupons.dart';
+import 'package:test/data/api.dart';
+import 'package:test/screen/coupons.dart';
 import 'dart:async';
 
 class HomePage extends StatefulWidget {
@@ -182,7 +180,9 @@ class RedeemedCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Image.network(
                 image,
                 height: 70,
@@ -194,7 +194,9 @@ class RedeemedCard extends StatelessWidget {
                 'Grab your ticket for next purchase',
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Align(
                 alignment: Alignment.bottomLeft,
                 child: Image.network(
