@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:test/data/api.dart';
 import 'package:test/screen/coupons.dart';
@@ -27,10 +28,15 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  var points;
+  getPoints() async {
+    points = await fetchUser();
+  }
+
   @override
   void initState() {
     super.initState();
-
+    getPoints();
     widget.stream.listen((cost) {
       redeemCoins(cost);
     });
@@ -41,6 +47,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print(points);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -74,7 +81,7 @@ class _HomePageState extends State<HomePage> {
             ),
             SizedBox(height: 10),
             Text(
-              '$coins',
+              '$points',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 48,
@@ -97,7 +104,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             SizedBox(height: 130),
-            Expanded(
+            Flexible(
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -139,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                       SizedBox(height: 10),
                       Container(
                         height: 190,
-                        child: Expanded(
+                        child: Flexible(
                           child: ListView(
                             scrollDirection: Axis.horizontal,
                             children: [
@@ -183,11 +190,10 @@ class RedeemedCard extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              Image.network(
-                image,
-                height: 70,
-                width: 60,
-                fit: BoxFit.cover,
+              CachedNetworkImage(
+                imageUrl: image,
+                errorWidget: (context, url, error) =>
+                    Image.network('https://placehold.co/600x400'),
               ),
               SizedBox(height: 8),
               Text(
@@ -198,14 +204,12 @@ class RedeemedCard extends StatelessWidget {
                 height: 10,
               ),
               Align(
-                alignment: Alignment.bottomLeft,
-                child: Image.network(
-                  image,
-                  height: 14,
-                  width: 54,
-                  fit: BoxFit.cover,
-                ),
-              ),
+                  alignment: Alignment.bottomLeft,
+                  child: CachedNetworkImage(
+                    imageUrl: image,
+                    errorWidget: (context, url, error) =>
+                        Image.network('https://placehold.co/600x400'),
+                  )),
             ],
           ),
         ),

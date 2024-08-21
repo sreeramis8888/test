@@ -1,9 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pinput/pinput.dart';
 
 import '../data/api.dart';
-
 class CouponPage extends StatefulWidget {
   const CouponPage({super.key});
   @override
@@ -20,7 +20,7 @@ class _CouponPageState extends State<CouponPage> {
       body: Column(
         children: [
           FilterBar(),
-          Expanded(
+          Flexible(
             child: MainCardList(),
           ),
         ],
@@ -161,8 +161,10 @@ class InnerCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Spacer(),
-                Image.network(
-                  image,
+                Image.network(errorBuilder: (context, error, stackTrace) {
+                  return Image.network('https://placehold.co/600x400');
+                }
+                 , image,
                   height: 70,
                   width: 60,
                   fit: BoxFit.cover,
@@ -175,12 +177,8 @@ class InnerCard extends StatelessWidget {
                 Spacer(),
                 Align(
                   alignment: Alignment.bottomLeft,
-                  child: Image.network(
-                    brandlogo,
-                    height: 14,
-                    width: 54,
-                    fit: BoxFit.cover,
-                  ),
+                  child: CachedNetworkImage(imageUrl: image,
+                  errorWidget: (context, url, error) => Image.network('https://placehold.co/600x400'),)
                 ),
               ],
             ),
@@ -240,10 +238,8 @@ class CustomPopupDialog extends StatelessWidget {
                 color: Colors
                     .grey[200], // Replace with your image or background color
                 child: Center(
-                  child: Image.network(
-                    image, // Replace with your image asset
-                    fit: BoxFit.cover,
-                  ),
+                  child: CachedNetworkImage(imageUrl: image,
+                  errorWidget: (context, url, error) => Image.network('https://placehold.co/600x400'),)
                 ),
               ),
               SizedBox(height: 16),
@@ -285,7 +281,7 @@ class CustomPopupDialog extends StatelessWidget {
               SizedBox(height: 16),
               Row(
                 children: [
-                  Expanded(
+                  Flexible(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -304,7 +300,7 @@ class CustomPopupDialog extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 16),
-                  Expanded(
+                  Flexible(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

@@ -27,8 +27,34 @@ fetchCategory() async {
   if (response.statusCode == 200) {
     mapResponse = json.decode(response.body);
     data = mapResponse['result'];
+    print(data);
     category.addAll(data.map((item) => item['title'].toString()).toList());
     print(category);
+  } else {
+    print('Failed to load data: ${response.statusCode}');
+  }
+}
+
+fetchUser() async {
+  const String apiUrl =
+      "https://loyalty-app-pnwx.onrender.com/api/user/66bc79de8334b6c60af1cf17";
+  const String bearerToken =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzBhNjlhNTg3ZWVjNDg3MWI3Mzk4NyIsImlhdCI6MTcxNDQ4MDI4NH0.9iVivjFzBB1CV_eGOD34apiS6zuLGHlVWaFjl50V5Nc";
+  http.Response response = await http.get(
+    Uri.parse(apiUrl),
+    headers: {
+      'Authorization': 'Bearer $bearerToken',
+    },
+  );
+  if (response.statusCode == 200) {
+    mapResponse = json.decode(response.body);
+    print('$mapResponse hell');
+    int points = mapResponse['points'];
+
+    print(data);
+
+    print(category);
+    return points;
   } else {
     print('Failed to load data: ${response.statusCode}');
   }
@@ -48,7 +74,7 @@ fetchData() async {
   if (response.statusCode == 200) {
     mapResponse = json.decode(response.body);
     data = mapResponse['result'];
-
+    print(data);
     for (var item in data) {
       String brand = item['brand'].toString();
       if (!brandData.containsKey(brand)) {
@@ -88,7 +114,7 @@ redeemCard(id) async {
   );
   final Map<String, dynamic> responseData = json.decode(response.body);
   status = responseData['message'];
-
+  print(status);
   if (response.statusCode == 200) {
     if (responseData['status']) {
       cost = responseData['data']['coin_worth'];
